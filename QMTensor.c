@@ -54,12 +54,71 @@ QMTensor *QMTensor_(newFromArray)(double *data, long *shape, int ndim)
     return self;
 }
 
+void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2)
+{
+    if (!src) {
+        src = self;
+    }
+}
+
+// *strides нужен только для проверки формы, если эта проверка не нужна
+// и необходимо в любом случае произвести операцию смены формы, то
+// этот вместо этого параметра можно просто передать NULL
+void QMTensor_(resize)(QMTensor *self, int ndim, long *shape, long *strides)
+{
+    int isSameSize = 1;
+
+    if (strides)
+    {
+        for (int i = 0; i < ndim; i++)
+        {
+            if (self->shape[i] != shape[i])
+                isSameSize = 0;
+
+            if (self->strides[i] != strides[i])
+                isSameSize = 0;
+        }
+
+        if (self->ndim != ndim)
+            isSameSize = 0;
+
+        if (isSameSize)
+            return;
+    }
+    
+    if (self->ndim != ndim)
+    {
+        self->shape = realloc(self->shape, sizeof(long)*ndim);
+        self->strides = realloc(self->strides, sizeof(long)*ndim);
+    }
+
+    int s = 1;
+    for (int i = ndim-1; i >= 0; i--)
+    {
+        self->shape[i] = shape[i];
+
+        self->strides[i] = s;
+        s *= shape[i];
+    }
+
+    self->ndim = ndim;
+
+    if (self->data == NULL) {
+        self->data = malloc(sizeof(double) * QMTensor_(nElement)(self));
+    }
+}
+
 void QMTensor_(free)(QMTensor *src)
 {
     free(src->shape);
     free(src->strides);
     free(src->data);
     free(src);
+}
+
+void QMTensor_(set)(QMTensor *self, QMTensor *src)
+{
+    
 }
 
 double QMTensor_(get2d)(QMTensor *src, int i, int j)

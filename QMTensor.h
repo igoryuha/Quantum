@@ -11,6 +11,10 @@ typedef struct QMTensor {
 QMTensor *QMTensor_(new)(void);
 QMTensor *QMTensor_(newFromArray)(double *data, long *shape, int ndim);
 
+void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2);
+void QMTensor_(set)(QMTensor *self, QMTensor *src);
+void QMTensor_(resize)(QMTensor *self, int ndim, long *shape, long *strides);
+
 long QMTensor_(stride)(QMTensor *src, int dim);
 long QMTensor_(nElement)(QMTensor *src);
 
