@@ -8,7 +8,7 @@ void QMTensor_(print2d)(QMTensor *src)
     for (int i = 0; i < src->shape[0]; i++) {
         printf("[ ");
         for (int j = 0; j < src->shape[1]; j++) {
-            printf("%.2f ", QMTensor_(get2d)(src, i, j));
+            printf("%.2"DATA_FORMAT" ", QMTensor_(get2d)(src, i, j));
         }
         printf("]\n");
     }
@@ -23,7 +23,7 @@ void QMTensor_(print3d)(QMTensor *src)
         for (int i = 0; i < src->shape[1]; i++) {
             printf("[ ");
             for (int j = 0; j < src->shape[2]; j++) {
-                printf("%.2f ", QMTensor_(get3d)(src, k, i, j));
+                printf("%.2"DATA_FORMAT" ", QMTensor_(get3d)(src, k, i, j));
             }
             printf("]\n");
         }
