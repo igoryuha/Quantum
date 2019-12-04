@@ -31,7 +31,7 @@ long QMTensor_(nElement)(QMTensor *src)
     return n;
 }
 
-QMTensor *QMTensor_(newFromArray)(const double *data, const long *shape, int ndim)
+QMTensor *QMTensor_(newFromArray)(const real *data, const long *shape, int ndim)
 {
     QMTensor *self = QMTensor_(new)();
 
@@ -50,7 +50,7 @@ QMTensor *QMTensor_(newFromArray)(const double *data, const long *shape, int ndi
     }
 
     long nElement = QMTensor_(nElement)(self);
-    self->data = malloc(sizeof(double) * nElement);
+    self->data = malloc(sizeof(real) * nElement);
 
     for (int i = 0; i < nElement; i++) {
         self->data[i] = data[i];
@@ -66,7 +66,7 @@ void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2)
     }
 
     if (self != src) {
-
+        // TODO if not inplace
     }
 
     long tmp = self->strides[dim1];
@@ -129,7 +129,7 @@ void QMTensor_(reshape)(QMTensor *self, int ndim, const long *shape, const long 
     self->ndim = ndim;
 
     if (self->data == NULL) {
-        self->data = malloc(sizeof(double) * QMTensor_(nElement)(self));
+        self->data = malloc(sizeof(real) * QMTensor_(nElement)(self));
     }
 }
 
@@ -146,12 +146,12 @@ void QMTensor_(set)(QMTensor *self, QMTensor *src)
     
 }
 
-double QMTensor_(get2d)(QMTensor *src, int i, int j)
+real QMTensor_(get2d)(QMTensor *src, int i, int j)
 {
     return src->data[i*src->strides[0] + j*src->strides[1]];
 }
 
-double QMTensor_(get3d)(QMTensor *src, int i, int j, int k)
+real QMTensor_(get3d)(QMTensor *src, int i, int j, int k)
 {
     return src->data[i*src->strides[0] + j*src->strides[1] + k*src->strides[2]];
 }

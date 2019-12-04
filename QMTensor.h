@@ -5,11 +5,11 @@ typedef struct QMTensor {
     int ndim;
     long *shape;
     long *strides;
-    double *data;
+    real *data;
 } QMTensor;
 
 QMTensor *QMTensor_(new)(void);
-QMTensor *QMTensor_(newFromArray)(const double *data, const long *shape, int ndim);
+QMTensor *QMTensor_(newFromArray)(const real *data, const long *shape, int ndim);
 
 void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2);
 void QMTensor_(set)(QMTensor *self, QMTensor *src);
@@ -23,5 +23,5 @@ long QMTensor_(nElement)(QMTensor *src);
 
 void QMTensor_(free)(QMTensor *src);
 
-double QMTensor_(get2d)(QMTensor *src,  int i, int j);
-double QMTensor_(get3d)(QMTensor *src,  int i, int j, int k);
+real QMTensor_(get2d)(QMTensor *src,  int i, int j);
+real QMTensor_(get3d)(QMTensor *src,  int i, int j, int k);
