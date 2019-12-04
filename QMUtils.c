@@ -4,6 +4,7 @@
 void QMTensor_(print2d)(QMTensor *src)
 {
     printf("\n");
+    printf("dim %ldx%ld \n", src->shape[0], src->shape[1]);
     for (int i = 0; i < src->shape[0]; i++) {
         printf("[ ");
         for (int j = 0; j < src->shape[1]; j++) {
