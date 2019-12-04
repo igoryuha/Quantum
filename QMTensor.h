@@ -1,0 +1,17 @@
+#include "QMGeneral.h"
+
+/* metadata */
+typedef struct QMTensor {
+    int ndim;
+    long *shape;
+    long *strides;
+    double *data;
+} QMTensor;
+
+QMTensor *QMTensor_(new)(void);
+QMTensor *QMTensor_(newFromArray)(double *data, long *shape, int ndim);
+
+long QMTensor_(stride)(QMTensor *src, int dim);
+long QMTensor_(nElement)(QMTensor *src);
+
+void QMTensor_(free)(QMTensor *src);
