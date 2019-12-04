@@ -61,9 +61,6 @@ void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2)
     }
 }
 
-// *strides нужен только для проверки формы, если эта проверка не нужна
-// и необходимо в любом случае произвести операцию смены формы, то
-// этот вместо этого параметра можно просто передать NULL
 void QMTensor_(resize)(QMTensor *self, int ndim, long *shape, long *strides)
 {
     int isSameSize = 1;
