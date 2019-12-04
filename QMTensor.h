@@ -15,3 +15,6 @@ long QMTensor_(stride)(QMTensor *src, int dim);
 long QMTensor_(nElement)(QMTensor *src);
 
 void QMTensor_(free)(QMTensor *src);
+
+double QMTensor_(get2d)(QMTensor *src,  int i, int j);
+double QMTensor_(get3d)(QMTensor *src,  int i, int j, int k);

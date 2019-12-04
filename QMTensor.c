@@ -61,3 +61,13 @@ void QMTensor_(free)(QMTensor *src)
     free(src->data);
     free(src);
 }
+
+double QMTensor_(get2d)(QMTensor *src, int i, int j)
+{
+    return src->data[i*src->strides[0] + j*src->strides[1]];
+}
+
+double QMTensor_(get3d)(QMTensor *src, int i, int j, int k)
+{
+    return src->data[i*src->strides[0] + j*src->strides[1] + k*src->strides[2]];
+}
