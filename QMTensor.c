@@ -61,6 +61,18 @@ void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2)
     }
 }
 
+void QMTensor_(resize2d)(QMTensor *self,long dim1, long dim2)
+{
+    long shape[2] = {dim1, dim2};
+    QMTensor_(resize)(self, 2, shape, NULL);
+}
+
+void QMTensor_(resize3d)(QMTensor *self,long dim1, long dim2, long dim3)
+{
+    long shape[3] = {dim1, dim2, dim3};
+    QMTensor_(resize)(self, 3, shape, NULL);
+}
+
 void QMTensor_(resize)(QMTensor *self, int ndim, long *shape, long *strides)
 {
     int isSameSize = 1;
