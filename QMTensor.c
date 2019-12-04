@@ -64,6 +64,17 @@ void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2)
     if (!src) {
         src = self;
     }
+
+    if (self != src) {
+
+    }
+
+    long tmp = self->strides[dim1];
+    self->strides[dim1] = self->strides[dim2];
+    self->strides[dim2] = tmp;
+    tmp = self->shape[dim1];
+    self->shape[dim1] = self->shape[dim2];
+    self->shape[dim2] = tmp;
 }
 
 void QMTensor_(reshape2d)(QMTensor *self,long dim1, long dim2)
