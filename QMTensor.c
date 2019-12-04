@@ -15,6 +15,11 @@ long QMTensor_(stride)(QMTensor *src, int dim)
     return src->strides[dim];
 }
 
+long QMTensor_(shape)(QMTensor *src, int dim)
+{
+    return src->shape[dim];
+}
+
 long QMTensor_(nElement)(QMTensor *src)
 {
     long n = 1;
