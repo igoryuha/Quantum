@@ -1,2 +1,6 @@
 /test
 .vscode/
+build
+.DS_*
+.idea/
+CMakeLists.txt

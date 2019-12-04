@@ -17,7 +17,7 @@ long QMTensor_(stride)(QMTensor *src, int dim)
 
 long QMTensor_(nElement)(QMTensor *src)
 {
-    int n = 1;
+    long n = 1;
 
     for (int i = 0; i < src->ndim; i++) {
         n *= src->shape[i];
@@ -26,7 +26,7 @@ long QMTensor_(nElement)(QMTensor *src)
     return n;
 }
 
-QMTensor *QMTensor_(newFromArray)(double *data, long *shape, int ndim)
+QMTensor *QMTensor_(newFromArray)(const double *data, const long *shape, int ndim)
 {
     QMTensor *self = QMTensor_(new)();
 
@@ -38,7 +38,7 @@ QMTensor *QMTensor_(newFromArray)(double *data, long *shape, int ndim)
         self->shape[i] = shape[i];
     }
 
-    int s = 1;
+    long s = 1;
     for (int i = ndim-1; i >= 0; i--) {
         self->strides[i] = s;
         s *= self->shape[i];
@@ -73,7 +73,7 @@ void QMTensor_(reshape3d)(QMTensor *self,long dim1, long dim2, long dim3)
     QMTensor_(reshape)(self, 3, shape, NULL);
 }
 
-void QMTensor_(reshape)(QMTensor *self, int ndim, long *shape, long *strides)
+void QMTensor_(reshape)(QMTensor *self, int ndim, const long *shape, const long *strides)
 {
     int isSameSize = 1;
 
@@ -101,7 +101,7 @@ void QMTensor_(reshape)(QMTensor *self, int ndim, long *shape, long *strides)
         self->strides = realloc(self->strides, sizeof(long)*ndim);
     }
 
-    int s = 1;
+    long s = 1;
     for (int i = ndim-1; i >= 0; i--)
     {
         self->shape[i] = shape[i];
