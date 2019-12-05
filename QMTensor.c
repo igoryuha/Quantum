@@ -41,8 +41,8 @@ QMTensor *QMTensor_(newFromArray)(const real *data, const long *shape, int ndim)
     self->ndim = ndim;
     self->shape = malloc(sizeof(long)*ndim);
     self->strides = malloc(sizeof(long)*ndim);
-    self->storage = malloc(sizeof(QMStorage));
-    self->storage->refCount = 1;
+
+    self->storage = QMStorage_(new)();
 
     for (int i = 0; i < ndim; i++) {
         self->shape[i] = shape[i];
