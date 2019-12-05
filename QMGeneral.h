@@ -1,1 +1,2 @@
-#define QMTensor_(NAME) QM_ ## NAME
+#define QMTensor_(NAME) QMTensor ## NAME
+#define QMStorage_(NAME) QMStorage ## NAME

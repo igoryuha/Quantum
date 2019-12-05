@@ -1,11 +1,12 @@
-#include "QMGeneral.h"
 
 /* metadata */
 typedef struct QMTensor {
+    int refCount;
     int ndim;
     long *shape;
     long *strides;
-    real *data;
+    QMStorage *storage;
+    long storageOffset;
 } QMTensor;
 
 QMTensor *QMTensor_(new)(void);
