@@ -170,6 +170,21 @@ void QMTensor_(free)(QMTensor *src)
     }
 }
 
+int QMTensor_(isContiguous)(QMTensor *src)
+{
+    long s = 1;
+
+    for (int i = src->ndim-1; i >= 0; i--)
+    {
+        if (src->strides[i] != s)
+            return 0;
+
+        s *= src->shape[i];
+    }
+
+    return 1;
+}
+
 real QMTensor_(get2d)(QMTensor *src, int i, int j)
 {
     return src->storage->data[i*src->strides[0] + j*src->strides[1]];

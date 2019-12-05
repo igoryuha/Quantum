@@ -24,5 +24,7 @@ long QMTensor_(nElement)(QMTensor *src);
 
 void QMTensor_(free)(QMTensor *src);
 
+int QMTensor_(isContiguous)(QMTensor *src);
+
 real QMTensor_(get2d)(QMTensor *src,  int i, int j);
 real QMTensor_(get3d)(QMTensor *src,  int i, int j, int k);
