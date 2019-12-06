@@ -203,6 +203,26 @@ void QMTensor_(narrow)(QMTensor *self, QMTensor *src, int dim, int start, int le
     self->shape[dim] = length;
 }
 
+void QMTensor_(select)(QMTensor *self, QMTensor *src, int dim, int index)
+{
+    if (!src)
+        src = self;
+
+    QMArgCheck((dim > 0) && (dim < src->ndim), "out of range");
+    QMArgCheck((index >= 0) && (index < src->shape[dim]), "out of range");
+
+    if (self != src)
+        QMTensor_(set)(self, src);
+
+    QMTensor_(narrow)(self, src, dim, index, 1);
+    for (int i = dim; i < self->ndim-1; i++)
+    {
+        self->shape[i] = self->shape[i+1];
+        self->strides[i] = self->strides[i+1];
+    }
+    self->ndim--;
+}
+
 void QMTensor_(slice2d)(QMTensor *self, QMTensor *src, int iStart, int iStop, int jStart, int jStop)
 {
     if (!src)

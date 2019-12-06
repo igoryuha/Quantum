@@ -19,6 +19,7 @@ void QMTensor_(reshape3d)(QMTensor *self,long dim1, long dim2, long dim3);
 void QMTensor_(reshape)(QMTensor *self, int ndim, const long *shape, const long *strides);
 
 void QMTensor_(narrow)(QMTensor *self, QMTensor *src, int dim, int start, int length);
+void QMTensor_(select)(QMTensor *self, QMTensor *src, int dim, int index);
 
 long QMTensor_(stride)(QMTensor *src, int dim);
 long QMTensor_(shape)(QMTensor *src, int dim);
