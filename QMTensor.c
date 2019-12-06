@@ -192,6 +192,7 @@ void QMTensor_(narrow)(QMTensor *self, QMTensor *src, int dim, int start, int le
 
     QMArgCheck((dim >= 0) && (dim < src->ndim), "out of range");
     QMArgCheck((start >= 0) && (start < src->shape[dim]), "out of range");
+    QMArgCheck((length > 0) && (length <= src->shape[dim] - start), "out of range");
 
     if (self != src)
         QMTensor_(set)(self, src);
