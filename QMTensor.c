@@ -185,12 +185,26 @@ int QMTensor_(isContiguous)(QMTensor *src)
     return 1;
 }
 
+void QMTensor_(narrow)(QMTensor *self, QMTensor *src, int dim, int start, int length)
+{
+    if (!src)
+        src = self;
+
+    if (self != src)
+        QMTensor_(set)(self, src);
+
+    if (start > 0)
+        self->storageOffset += start * self->strides[dim];
+
+    self->shape[dim] = length;
+}
+
 real QMTensor_(get2d)(QMTensor *src, int i, int j)
 {
-    return src->storage->data[i*src->strides[0] + j*src->strides[1]];
+    return src->storage->data[src->storageOffset + i*src->strides[0] + j*src->strides[1]];
 }
 
 real QMTensor_(get3d)(QMTensor *src, int i, int j, int k)
 {
-    return src->storage->data[i*src->strides[0] + j*src->strides[1] + k*src->strides[2]];
+    return src->storage->data[src->storageOffset + i*src->strides[0] + j*src->strides[1] + k*src->strides[2]];
 }
