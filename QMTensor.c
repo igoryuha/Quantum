@@ -199,6 +199,22 @@ void QMTensor_(narrow)(QMTensor *self, QMTensor *src, int dim, int start, int le
     self->shape[dim] = length;
 }
 
+void QMTensor_(slice2d)(QMTensor *self, QMTensor *src, int iStart, int iStop, int jStart, int jStop)
+{
+    if (!src)
+        src = self;
+
+    if (self != src)
+        QMTensor_(set)(self, src);
+
+    QMTensor *tmp = QMTensor_(new)();
+
+    QMTensor_(narrow)(tmp, self, 0, iStart, iStop-iStart);
+    QMTensor_(narrow)(self, tmp, 1, jStart, jStop-jStart);
+
+    QMTensor_(free)(tmp);
+}
+
 real QMTensor_(get2d)(QMTensor *src, int i, int j)
 {
     return src->storage->data[src->storageOffset + i*src->strides[0] + j*src->strides[1]];
