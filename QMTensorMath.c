@@ -121,12 +121,12 @@ void QMTensor_(div)(QMTensor *r, QMTensor *t, real value)
     }
 }
 
-void QMTensor_(cmul)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
+void QMTensor_(cadd)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
 {
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                QMTensor_(_cmul)(r_data, t_data, value, src_data, r_len);
+                QMTensor_(_cadd)(r_data, t_data, value, src_data, r_len);
         )
     }
 }

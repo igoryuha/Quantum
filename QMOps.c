@@ -24,7 +24,7 @@ void QMTensor_(divs)(real *r, real *t, real value, int n)
     }
 }
 
-void QMTensor_(_cmul)(real *r, real *t, real value, const real *src, int n)
+void QMTensor_(_cadd)(real *r, real *t, real value, const real *src, int n)
 {
     for (int i = 0; i < n; i++)
     {
