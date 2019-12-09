@@ -130,3 +130,8 @@ void QMTensor_(cadd)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
         )
     }
 }
+
+void QMTensor_(csub)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
+{
+    QMTensor_(cadd)(r, t, -value, src);
+}
