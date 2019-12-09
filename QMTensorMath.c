@@ -74,3 +74,23 @@ void QMTensor_(sub)(QMTensor *r, QMTensor *t, real value)
 {
     QMTensor_(add)(r, t, -value);
 }
+
+void QMTensor_(mul)(QMTensor *r, QMTensor *t, real value)
+{
+    if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
+    {
+        QM_TENSOR_APPLY2_CONTIG(real, r, real, t,
+                QMTensor_(muls)(r_data, t_data, value, r_len);
+        )
+    }
+}
+
+void QMTensor_(div)(QMTensor *r, QMTensor *t, real value)
+{
+    if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
+    {
+        QM_TENSOR_APPLY2_CONTIG(real, r, real, t,
+                QMTensor_(divs)(r_data, t_data, value, r_len);
+        )
+    }
+}
