@@ -59,6 +59,32 @@
 }
 #endif
 
+#ifdef _OPENMP
+#define QM_TENSOR_APPLY3_CONTIG(TYPE1, TENSOR1, TYPE2, TENSOR2, TYPE3, TENSOR3, CODE)       \
+{                                                                                           \
+    long TENSOR1_size = QMTensor_(nElement)(TENSOR1);                                       \
+    PRAGMA(omp parallel)                                                                    \
+    {                                                                                       \
+        size_t num_threads = omp_get_num_threads();                                         \
+        size_t tid = omp_get_thread_num();                                                  \
+        int data_offset = (TENSOR1_size / num_threads) * tid;                               \
+        int TENSOR1##_len = (num_threads - tid) == 1                                        \
+                ? (TENSOR1_size / num_threads) + (TENSOR1_size % num_threads)               \
+                : (TENSOR1_size / num_threads);                                             \
+        TYPE1 *TENSOR1##_data = QMTensor_(data)(TENSOR1) + data_offset;                     \
+        TYPE2 *TENSOR2##_data = QMTensor_(data)(TENSOR2) + data_offset;                     \
+        TYPE2 *TENSOR3##_data = QMTensor_(data)(TENSOR3) + data_offset;                     \
+        CODE                                                                                \
+    }                                                                                       \
+}
+
+#else
+#define QM_TENSOR_APPLY2_CONTIG(TYPE, TENSOR, CODE) \
+{\
+    \
+}
+#endif
+
 
 void QMTensor_(add)(QMTensor *r, QMTensor *t, real value)
 {
@@ -91,6 +117,16 @@ void QMTensor_(div)(QMTensor *r, QMTensor *t, real value)
     {
         QM_TENSOR_APPLY2_CONTIG(real, r, real, t,
                 QMTensor_(divs)(r_data, t_data, value, r_len);
+        )
+    }
+}
+
+void QMTensor_(cmul)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
+{
+    if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
+    {
+        QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
+                QMTensor_(_cmul)(r_data, t_data, value, src_data, r_len);
         )
     }
 }
