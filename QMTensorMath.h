@@ -6,3 +6,5 @@ void QMTensor_(div)(QMTensor *r, QMTensor *t, real value);
 
 void QMTensor_(cadd)(QMTensor *r, QMTensor *t, real value, QMTensor *src);
 void QMTensor_(csub)(QMTensor *r, QMTensor *t, real value, QMTensor *src);
+void QMTensor_(cmul)(QMTensor *r, QMTensor *t, QMTensor *src);
+void QMTensor_(cdiv)(QMTensor *r, QMTensor *t, QMTensor *src);
