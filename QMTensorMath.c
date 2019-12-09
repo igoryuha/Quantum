@@ -155,3 +155,13 @@ void QMTensor_(cdiv)(QMTensor *r, QMTensor *t, QMTensor *src)
         )
     }
 }
+
+void QMTensor_(cpow)(QMTensor *r, QMTensor *t, QMTensor *src)
+{
+    if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
+    {
+        QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
+                                QMTensor_(_cpow)(r_data, t_data, src_data, r_len);
+        )
+    }
+}

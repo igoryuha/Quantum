@@ -47,3 +47,11 @@ void QMTensor_(_cdiv)(real *r, real *t, const real *src, int n)
         r[i] = t[i] / src[i];
     }
 }
+
+void QMTensor_(_cpow)(real *r, real *t, const real *src, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        r[i] = pow(t[i], src[i]);
+    }
+}
