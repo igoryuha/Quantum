@@ -24,6 +24,13 @@ void QMTensor_(divs)(real *r, real *t, real value, int n)
     }
 }
 
+void QMTensor_(pows)(real *r, real *t, real value, int n){
+    for (int i = 0; i < n; i++)
+    {
+        r[i] = pow(t[i], value);
+    }
+}
+
 void QMTensor_(_cadd)(real *r, real *t, real value, const real *src, int n)
 {
     for (int i = 0; i < n; i++)
