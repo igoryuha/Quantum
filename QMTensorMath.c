@@ -126,7 +126,7 @@ void QMTensor_(pow)(QMTensor *r, QMTensor *t, real value)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY2_CONTIG(real, r, real, t,
-                                QMTensor_(pows)(r_data, t_data, value, r_len);
+                QMTensor_(pows)(r_data, t_data, value, r_len);
         )
     }
 }
@@ -151,7 +151,7 @@ void QMTensor_(cmul)(QMTensor *r, QMTensor *t, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                                QMTensor_(_cmul)(r_data, t_data, src_data, r_len);
+                QMTensor_(_cmul)(r_data, t_data, src_data, r_len);
         )
     }
 }
@@ -161,7 +161,7 @@ void QMTensor_(cdiv)(QMTensor *r, QMTensor *t, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                                QMTensor_(_cdiv)(r_data, t_data, src_data, r_len);
+                QMTensor_(_cdiv)(r_data, t_data, src_data, r_len);
         )
     }
 }
@@ -171,7 +171,17 @@ void QMTensor_(cpow)(QMTensor *r, QMTensor *t, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                                QMTensor_(_cpow)(r_data, t_data, src_data, r_len);
+                QMTensor_(_cpow)(r_data, t_data, src_data, r_len);
+        )
+    }
+}
+
+void QMTensor_(clip)(QMTensor *r, QMTensor *t, real min, real max)
+{
+    if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
+    {
+        QM_TENSOR_APPLY2_CONTIG(real, r, real, t,
+                QMTensor_(clips)(r_data, t_data, min, max, r_len);
         )
     }
 }

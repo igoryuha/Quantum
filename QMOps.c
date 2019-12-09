@@ -62,3 +62,11 @@ void QMTensor_(_cpow)(real *r, real *t, const real *src, int n)
         r[i] = pow(t[i], src[i]);
     }
 }
+
+void QMTensor_(clips)(real *r, real *t, real min, real max, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        r[i] = t[i] < min ? min : (t[i] > max ? max : t[i]);
+    }
+}

@@ -10,3 +10,5 @@ void QMTensor_(csub)(QMTensor *r, QMTensor *t, real value, QMTensor *src);
 void QMTensor_(cmul)(QMTensor *r, QMTensor *t, QMTensor *src);
 void QMTensor_(cdiv)(QMTensor *r, QMTensor *t, QMTensor *src);
 void QMTensor_(cpow)(QMTensor *r, QMTensor *t, QMTensor *src);
+
+void QMTensor_(clip)(QMTensor *r, QMTensor *t, real min, real max);
