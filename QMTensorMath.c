@@ -79,7 +79,7 @@
 }
 
 #else
-#define QM_TENSOR_APPLY2_CONTIG(TYPE, TENSOR, CODE) \
+#define QM_TENSOR_APPLY3_CONTIG(TYPE, TENSOR, CODE) \
 {\
     \
 }
