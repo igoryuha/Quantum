@@ -31,5 +31,8 @@ int QMTensor_(isContiguous)(QMTensor *src);
 
 void QMTensor_(slice2d)(QMTensor *self, QMTensor *src, int iStart, int iStop, int jStart, int jStop);
 
+real *QMTensor_(data)(QMTensor *src);
+
+real QMTensor_(get1d)(QMTensor *src, int i);
 real QMTensor_(get2d)(QMTensor *src,  int i, int j);
 real QMTensor_(get3d)(QMTensor *src,  int i, int j, int k);

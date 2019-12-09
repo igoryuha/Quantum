@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include "QM.h"
 
+void QMTensor_(print1d)(QMTensor *src)
+{
+    printf("\n");
+    printf("[ ");
+    for (int i = 0; i < src->shape[0]; i++)
+    {
+        printf("%.2"DATA_FORMAT", ", QMTensor_(get1d)(src, i));
+    }
+    printf("\b\b ]\n");
+}
+
 void QMTensor_(print2d)(QMTensor *src)
 {
     printf("\n");
@@ -33,7 +44,10 @@ void QMTensor_(print3d)(QMTensor *src)
 
 void QMTensor_(print)(QMTensor *src)
 {
-    if (src->ndim == 2) {
+    if (src->ndim == 1) {
+        QMTensor_(print1d)(src);
+    }
+    else if (src->ndim == 2) {
         QMTensor_(print2d)(src);
     }
     else if (src->ndim == 3) {

@@ -239,6 +239,18 @@ void QMTensor_(slice2d)(QMTensor *self, QMTensor *src, int iStart, int iStop, in
     QMTensor_(free)(tmp);
 }
 
+real *QMTensor_(data)(QMTensor *src)
+{
+    if (src->storage)
+        return src->storage->data + src->storageOffset;
+    return NULL;
+}
+
+real QMTensor_(get1d)(QMTensor *src, int i)
+{
+    return src->storage->data[src->storageOffset + i*src->strides[0]];
+}
+
 real QMTensor_(get2d)(QMTensor *src, int i, int j)
 {
     return src->storage->data[src->storageOffset + i*src->strides[0] + j*src->strides[1]];
