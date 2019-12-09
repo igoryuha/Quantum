@@ -136,7 +136,7 @@ void QMTensor_(cadd)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                QMTensor_(_cadd)(r_data, t_data, value, src_data, r_len);
+                QMTensor_(cadds)(r_data, t_data, value, src_data, r_len);
         )
     }
 }
@@ -151,7 +151,7 @@ void QMTensor_(cmul)(QMTensor *r, QMTensor *t, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                QMTensor_(_cmul)(r_data, t_data, src_data, r_len);
+                QMTensor_(cmuls)(r_data, t_data, src_data, r_len);
         )
     }
 }
@@ -161,7 +161,7 @@ void QMTensor_(cdiv)(QMTensor *r, QMTensor *t, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                QMTensor_(_cdiv)(r_data, t_data, src_data, r_len);
+                QMTensor_(cdivs)(r_data, t_data, src_data, r_len);
         )
     }
 }
@@ -171,7 +171,7 @@ void QMTensor_(cpow)(QMTensor *r, QMTensor *t, QMTensor *src)
     if (QMTensor_(isContiguous)(r) && QMTensor_(isContiguous)(t) && QMTensor_(nElement)(r) == QMTensor_(nElement)(t))
     {
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
-                QMTensor_(_cpow)(r_data, t_data, src_data, r_len);
+                QMTensor_(cpows)(r_data, t_data, src_data, r_len);
         )
     }
 }
