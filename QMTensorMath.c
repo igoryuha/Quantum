@@ -94,6 +94,9 @@ void QMTensor_(add)(QMTensor *r, QMTensor *t, real value)
                 QMTensor_(adds)(r_data, t_data, value, r_len);
         )
     }
+    else {
+        QM_TENSOR_APPLY2(real, r, real, t, *r_data = *t_data + value;);
+    }
 }
 
 void QMTensor_(sub)(QMTensor *r, QMTensor *t, real value)
@@ -138,6 +141,9 @@ void QMTensor_(cadd)(QMTensor *r, QMTensor *t, real value, QMTensor *src)
         QM_TENSOR_APPLY3_CONTIG(real, r, real, t, real, src,
                 QMTensor_(cadds)(r_data, t_data, value, src_data, r_len);
         )
+    }
+    else {
+        QM_TENSOR_APPLY3(real, r, real, t, real, src, *r_data = *t_data + value * *src_data;);
     }
 }
 

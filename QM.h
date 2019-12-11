@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include "QMApplyOps.h"
 #include "QMCommon.h"
 #include "QMDoubleDataType.h"
 #include "QMGeneral.h"
