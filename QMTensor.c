@@ -21,6 +21,17 @@ QMTensor *QMTensor_(newClone)(QMTensor *self)
     return t;
 }
 
+QMTensor *QMTensor_(newContiguous)(QMTensor *self)
+{
+    if (!QMTensor_(isContiguous)(self))
+        return QMTensor_(newClone)(self);
+    else
+    {
+        QMTensor_(link)(self);
+        return self;
+    }
+}
+
 long QMTensor_(stride)(QMTensor *src, int dim)
 {
     return src->strides[dim];
@@ -29,6 +40,11 @@ long QMTensor_(stride)(QMTensor *src, int dim)
 long QMTensor_(shape)(QMTensor *src, int dim)
 {
     return src->shape[dim];
+}
+
+int QMTensor_(nDimension)(QMTensor *src)
+{
+    return src->ndim;
 }
 
 long QMTensor_(nElement)(QMTensor *src)
@@ -89,6 +105,11 @@ void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2)
     tmp = self->shape[dim1];
     self->shape[dim1] = self->shape[dim2];
     self->shape[dim2] = tmp;
+}
+
+void QMTensor_(link)(QMTensor *src)
+{
+    QMIncRef(&src->refCount);
 }
 
 void QMTensor_(set)(QMTensor *self, QMTensor *src)

@@ -13,6 +13,7 @@ QMTensor *QMTensor_(new)(void);
 QMTensor *QMTensor_(newFromArray)(const real *data, const long *shape, int ndim);
 
 QMTensor *QMTensor_(newClone)(QMTensor *self);
+QMTensor *QMTensor_(newContiguous)(QMTensor *self);
 
 void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2);
 void QMTensor_(set)(QMTensor *self, QMTensor *src);
@@ -26,8 +27,11 @@ void QMTensor_(select)(QMTensor *self, QMTensor *src, int dim, int index);
 long QMTensor_(stride)(QMTensor *src, int dim);
 long QMTensor_(shape)(QMTensor *src, int dim);
 long QMTensor_(nElement)(QMTensor *src);
+int QMTensor_(nDimension)(QMTensor *src);
 
 void QMTensor_(free)(QMTensor *src);
+
+void QMTensor_(link)(QMTensor *src);
 
 int QMTensor_(isContiguous)(QMTensor *src);
 

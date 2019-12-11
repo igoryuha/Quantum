@@ -58,6 +58,26 @@ void QMTensor_(print)(QMTensor *src)
     }
 }
 
+int QMTensor_(copyTransposeValid)(QMTensor *tensor, QMTensor *src)
+{
+    const int MIN_SZ = 60*60;
+    return QMTensor_(isContiguous)(tensor) &&
+           QMTensor_(nDimension)(src) == 2 &&
+           QMTensor_(stride)(src, 0) == 1 &&
+           QMTensor_(stride)(src, 1) == QMTensor_(shape)(src, 0) &&
+           QMTensor_(nElement)(tensor) >= MIN_SZ;
+}
+
+void QMTensor_(copyTranspose)(QMTensor *tensor, QMTensor *src)
+{
+    #define MIN(x, y) (((x) < (y)) ? (x) : (y))
+    #define MAX(x, y) (((x) > (y)) ? (x) : (y))
+
+    const int BLOCK_SZ = 60;
+
+
+}
+
 void QMTensor_(copy)(QMTensor *tensor, QMTensor *src)
 {
     if (tensor == src)
@@ -69,6 +89,9 @@ void QMTensor_(copy)(QMTensor *tensor, QMTensor *src)
         real *srcData = QMTensor_(data)(src);
 
         memcpy(selfData, srcData, sizeof(real) * QMTensor_(nElement)(tensor));
+    }
+    else if (QMTensor_(copyTransposeValid)(tensor, src)) {
+
     }
     else {
         QM_TENSOR_APPLY2(real, tensor, real, src, *tensor_data = *src_data;);
