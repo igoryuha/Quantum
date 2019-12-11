@@ -13,6 +13,14 @@ QMTensor *QMTensor_(new)(void)
     return self;
 }
 
+QMTensor *QMTensor_(newClone)(QMTensor *self)
+{
+    QMTensor *t = QMTensor_(new)();
+    QMTensor_(reshape)(t, self->ndim, self->shape, NULL);
+    QMTensor_(copy)(t, self);
+    return t;
+}
+
 long QMTensor_(stride)(QMTensor *src, int dim)
 {
     return src->strides[dim];

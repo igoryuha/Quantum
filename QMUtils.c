@@ -57,3 +57,20 @@ void QMTensor_(print)(QMTensor *src)
         printf("Not implemented");
     }
 }
+
+void QMTensor_(copy)(QMTensor *tensor, QMTensor *src)
+{
+    if (tensor == src)
+        return;
+
+    if (QMTensor_(isContiguous)(tensor) && QMTensor_(isContiguous)(src) && QMTensor_(nElement)(tensor) == QMTensor_(nElement)(src))
+    {
+        real *selfData = QMTensor_(data)(tensor);
+        real *srcData = QMTensor_(data)(src);
+
+        memcpy(selfData, srcData, sizeof(real) * QMTensor_(nElement)(tensor));
+    }
+    else {
+        QM_TENSOR_APPLY2(real, tensor, real, src, *tensor_data = *src_data;);
+    }
+}

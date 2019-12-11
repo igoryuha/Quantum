@@ -12,6 +12,8 @@ typedef struct QMTensor {
 QMTensor *QMTensor_(new)(void);
 QMTensor *QMTensor_(newFromArray)(const real *data, const long *shape, int ndim);
 
+QMTensor *QMTensor_(newClone)(QMTensor *self);
+
 void QMTensor_(transpose)(QMTensor *self, QMTensor *src, int dim1, int dim2);
 void QMTensor_(set)(QMTensor *self, QMTensor *src);
 void QMTensor_(reshape2d)(QMTensor *self,long dim1, long dim2);
