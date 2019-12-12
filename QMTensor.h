@@ -20,6 +20,7 @@ void QMTensor_(set)(QMTensor *self, QMTensor *src);
 void QMTensor_(reshape2d)(QMTensor *self,long dim1, long dim2);
 void QMTensor_(reshape3d)(QMTensor *self,long dim1, long dim2, long dim3);
 void QMTensor_(reshape)(QMTensor *self, int ndim, const long *shape, const long *strides);
+void QMTensor_(reshapeAs)(QMTensor *self, QMTensor *src);
 
 void QMTensor_(narrow)(QMTensor *self, QMTensor *src, int dim, int start, int length);
 void QMTensor_(select)(QMTensor *self, QMTensor *src, int dim, int index);
@@ -34,6 +35,7 @@ void QMTensor_(free)(QMTensor *src);
 void QMTensor_(link)(QMTensor *src);
 
 int QMTensor_(isContiguous)(QMTensor *src);
+int QMTensor_(isSameSize)(QMTensor *self, QMTensor *src);
 
 void QMTensor_(slice2d)(QMTensor *self, QMTensor *src, int iStart, int iStop, int jStart, int jStop);
 

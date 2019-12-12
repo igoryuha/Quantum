@@ -185,6 +185,26 @@ void QMTensor_(reshape)(QMTensor *self, int ndim, const long *shape, const long 
     }
 }
 
+void QMTensor_(reshapeAs)(QMTensor *self, QMTensor *src)
+{
+    if (!QMTensor_(isSameSize)(self, src))
+        QMTensor_(reshape)(self, src->ndim, src->shape, NULL);
+}
+
+int QMTensor_(isSameSize)(QMTensor *self, QMTensor *src)
+{
+    if (self->ndim != src->ndim)
+        return 0;
+
+    for (int i = 0; i < self->ndim; i++)
+    {
+        if (self->shape[i] != src->shape[i])
+            return 0;
+    }
+
+    return 1;
+}
+
 void QMTensor_(free)(QMTensor *src)
 {
     if (QMDecRef(&src->refCount))
